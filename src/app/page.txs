@@ -1,0 +1,73 @@
+'use client';
+
+import Script from 'next/script';
+
+const htmlShell = `
+<div id="app">
+  <header id="header">
+    <div class="header-inner">
+      <button id="mobile-menu-btn" aria-label="Menú" onclick="toggleMobileMenu()">☰</button>
+      <div class="logo" onclick="navigate('home')">🌿 Granja de Aguada</div>
+      <nav id="main-nav">
+        <a data-nav="home" onclick="navigate('home')">Inicio</a>
+        <a data-nav="tienda" onclick="navigate('tienda')">Tienda</a>
+        <a data-nav="contacto" onclick="navigate('contacto')">Contacto</a>
+      </nav>
+      <div class="header-actions">
+        <button class="btn-icon btn-admin" onclick="openAdmin()" title="Administración">⚙️</button>
+        <button class="btn-icon" onclick="navigate('carrito')" title="Carrito">
+          🛒 <span id="cart-badge" class="hidden">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div id="mobile-menu">
+    <a data-nav="home" onclick="navigate('home')">🏠 Inicio</a>
+    <a data-nav="tienda" onclick="navigate('tienda')">🛍️ Tienda</a>
+    <a data-nav="contacto" onclick="navigate('contacto')">📞 Contacto</a>
+    <a onclick="openAdmin()">⚙️ Administración</a>
+  </div>
+
+  <main id="main-content"></main>
+
+  <footer id="footer">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <h3>🌿 Granja de Aguada</h3>
+        <p>La mayor granja de Aguada, Cienfuegos. Productos agrícolas y ganaderos frescos, directamente del campo a su mesa.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Enlaces Rápidos</h4>
+        <a onclick="navigate('home')">Inicio</a>
+        <a onclick="navigate('tienda')">Tienda</a>
+        <a onclick="navigate('contacto')">Contacto</a>
+      </div>
+      <div class="footer-contact">
+        <h4>Contacto</h4>
+        <a href="tel:+5343XXXXXXX">📞 +53 43 XXX XXXX</a>
+        <a href="https://wa.me/5343XXXXXXX" target="_blank" rel="noopener">💬 WhatsApp</a>
+        <a href="mailto:info@granjadeaguada.cu">✉️ info@granjadeaguada.cu</a>
+        <p>📍 Aguada, Cienfuegos, Cuba</p>
+        <p>🕐 Lun-Sáb: 7:00 AM - 5:00 PM</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; ${new Date().getFullYear()} Granja de Aguada. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5343XXXXXXX" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">💬</a>
+  <div id="admin-overlay" class="admin-overlay hidden"></div>
+  <div id="toast-container" class="toast-container"></div>
+  <div id="modal-container"></div>
+</div>`;
+
+export default function Home() {
+  return (
+    <>
+      <div dangerouslySetInnerHTML={{ __html: htmlShell }} />
+      <Script src="/app.js" strategy="afterInteractive" />
+    </>
+  );
+}
